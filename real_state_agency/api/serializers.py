@@ -1,24 +1,40 @@
 from rest_framework import serializers
-from properties.models import Property, Advert, Booking
+from properties.models import Property
 
 
-class BookingsSerializer(serializers.ModelSerializer):
+""" class BookingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = '__all__' """
 
 
-class AdvertsSerializer(serializers.ModelSerializer):
-    advert_bookings = BookingsSerializer(many=True)
+""" class AdvertsSerializer(serializers.ModelSerializer):
+    bookings = BookingsSerializer(many=True)
 
     class Meta:
         model = Advert
-        fields = '__all__'
+        fields = (
+            'id_advert',
+            'advertising_platform',
+            'platform_rate',
+            'created_at',
+            'update_at',
+            'bookings'
+        ) """
 
 
 class PropertiesSerializer(serializers.ModelSerializer):
-    post_adverts = AdvertsSerializer(many=True)
+    # adverts = AdvertsSerializer(many=True)
 
     class Meta:
         model = Property
-        fields = '__all__'
+        fields = (
+            'id_property',
+            'guest_limit',
+            'bathrooms',
+            'pets_accepted',
+            'cleaning_cost',
+            'activation_date',
+            'update_at',
+            # 'adverts'
+        )
