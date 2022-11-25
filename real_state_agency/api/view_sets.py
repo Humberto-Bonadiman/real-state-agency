@@ -8,11 +8,11 @@ class PropertiesViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PropertiesSerializer
 
 
-""" class AdvertsViewSet(viewsets.ModelViewSet):
+class AdvertsViewSet(viewsets.ModelViewSet):
     queryset = models.Advert.objects.all()
-    serializer_class = serializers.AdvertsSerializer """
+    serializer_class = serializers.AdvertsSerializer
 
 
-""" class BookingsViewSet(viewsets.ModelViewSet):
+class BookingsViewSet(viewsets.ModelViewSet):
     queryset = models.Booking.objects.all()
-    serializer_class = serializers.BookingsSerializer """
+    serializer_class = serializers.BookingsSerializer

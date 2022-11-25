@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from real_state_agency.api.view_sets import (
-    PropertiesViewSet
+    PropertiesViewSet,
+    AdvertsViewSet,
+    BookingsViewSet
 )
-""" AdvertsViewSet,
-    BookingsViewSet """
 
 route = routers.DefaultRouter()
 route.register(r'property', PropertiesViewSet, basename='Properties')
-# route.register(r'advert', AdvertsViewSet, basename='Adverts')
-# route.register(r'booking', BookingsViewSet, basename='Booking')
+route.register(r'advert', AdvertsViewSet, basename='Adverts')
+route.register(r'booking', BookingsViewSet, basename='Booking')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
