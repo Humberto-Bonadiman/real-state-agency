@@ -1,0 +1,231 @@
+[
+{
+    "model": "properties.property",
+    "pk": "1abc6d25-1533-4c2b-b1ae-b4341ea657d8",
+    "fields": {
+        "guest_limit": 10,
+        "bathrooms": 2,
+        "pets_accepted": true,
+        "comment_field": "",
+        "cleaning_cost": 120.0,
+        "activation_date": "2022-10-05",
+        "created_at": "2022-11-25T14:22:07.396Z",
+        "update_at": "2022-11-25T14:22:07.397Z"
+    }
+},
+{
+    "model": "properties.property",
+    "pk": "1b4cc260-e354-4858-a530-78b4e9287299",
+    "fields": {
+        "guest_limit": 6,
+        "bathrooms": 1,
+        "pets_accepted": true,
+        "comment_field": "comentário",
+        "cleaning_cost": 120.0,
+        "activation_date": "2022-11-01",
+        "created_at": "2022-11-26T04:17:12.424Z",
+        "update_at": "2022-11-26T04:17:28.138Z"
+    }
+},
+{
+    "model": "properties.property",
+    "pk": "222f52fc-7f55-4bbf-9737-7922450575d2",
+    "fields": {
+        "guest_limit": 5,
+        "bathrooms": 2,
+        "pets_accepted": false,
+        "comment_field": "comentário",
+        "cleaning_cost": 80.0,
+        "activation_date": "2022-05-31",
+        "created_at": "2022-11-26T15:50:28.001Z",
+        "update_at": "2022-11-26T15:50:28.001Z"
+    }
+},
+{
+    "model": "properties.property",
+    "pk": "4f1c4bbc-f375-4579-a8b1-38e05a4600c6",
+    "fields": {
+        "guest_limit": 4,
+        "bathrooms": 2,
+        "pets_accepted": true,
+        "comment_field": "comentário",
+        "cleaning_cost": 90.0,
+        "activation_date": "2022-01-30",
+        "created_at": "2022-11-26T15:49:38.859Z",
+        "update_at": "2022-11-26T15:49:38.859Z"
+    }
+},
+{
+    "model": "properties.property",
+    "pk": "73fa32a2-b605-4ddf-b89b-ba981fa4fee6",
+    "fields": {
+        "guest_limit": 3,
+        "bathrooms": 2,
+        "pets_accepted": true,
+        "comment_field": "comentário",
+        "cleaning_cost": 90.0,
+        "activation_date": "2022-01-30",
+        "created_at": "2022-11-26T15:49:22.967Z",
+        "update_at": "2022-11-26T15:49:22.967Z"
+    }
+},
+{
+    "model": "properties.advert",
+    "pk": "16343821-41ab-44c8-a693-b6a02889bf47",
+    "fields": {
+        "property": "1abc6d25-1533-4c2b-b1ae-b4341ea657d8",
+        "advertising_platform": "airbnb",
+        "platform_rate": 12.0,
+        "created_at": "2022-11-25T14:47:37.275Z",
+        "update_at": "2022-11-26T03:41:25.908Z"
+    }
+},
+{
+  "model": "properties.advert",
+  "pk": "1283e3e4-ba34-4e90-b673-b78a9239a0cc",
+  "fields": {
+      "property": "1b4cc260-e354-4858-a530-78b4e9287299",
+      "advertising_platform": "AlugueTemporada",
+      "platform_rate": 12.0,
+      "created_at": "2022-10-03T09:30:33.275Z",
+      "update_at": "2022-11-26T04:41:25.908Z"
+  }
+},
+{
+  "model": "properties.advert",
+  "pk": "1809ab34-a3a2-c0892-ba34-7b83a49c023",
+  "fields": {
+      "property": "1abc6d25-1533-4c2b-b1ae-b4341ea657d8",
+      "advertising_platform": "Wimdu",
+      "platform_rate": 12.0,
+      "created_at": "2022-07-05T10:27:34.275Z",
+      "update_at": "2022-11-26T04:41:25.908Z"
+  }
+},
+{
+  "model": "properties.advert",
+  "pk": "189034ab-432a-9b00-930a-a3871973abc9",
+  "fields": {
+      "property": "222f52fc-7f55-4bbf-9737-7922450575d2",
+      "advertising_platform": "Misterb&b",
+      "platform_rate": 12.0,
+      "created_at": "2022-06-12T16:40:24.275Z",
+      "update_at": "2022-11-26T10:41:25.908Z"
+  }
+},
+{
+  "model": "properties.advert",
+  "pk": "717282ac-12c4-3751-9834-36bc13a903bc",
+  "fields": {
+      "property": "4f1c4bbc-f375-4579-a8b1-38e05a4600c6",
+      "advertising_platform": "Tripadvisor Rentals",
+      "platform_rate": 12.0,
+      "created_at": "2022-10-29T17:01:02.275Z",
+      "update_at": "2022-11-26T15:41:25.908Z"
+  }
+},
+{
+    "model": "properties.booking",
+    "pk": "3bf8e693-924c-4796-a24c-02c731cc4e80",
+    "fields": {
+        "check_in_date": "2022-11-10",
+        "check_out_date": "2022-11-12T10:30:00Z",
+        "total_value": 300.0,
+        "number_guests": 1,
+        "created_at": "2022-11-25T15:03:45.904Z",
+        "update_at": "2022-11-26T04:17:45.232Z",
+        "advert": "16343821-41ab-44c8-a693-b6a02889bf47"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "5b8437ac-903a-1387-241c-12ac1384b903",
+    "fields": {
+        "check_in_date": "2022-10-20",
+        "check_out_date": "2022-10-22T09:20:00Z",
+        "total_value": 500.0,
+        "number_guests": 2,
+        "created_at": "2022-10-20T12:33:45.904Z",
+        "update_at": "2022-11-06T08:30:45.232Z",
+        "advert": "16343821-41ab-44c8-a693-b6a02889bf47"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "12bc9045-12bc-0235-ab32-2090cb387191",
+    "fields": {
+        "check_in_date": "2022-11-10",
+        "check_out_date": "2022-11-12T10:30:00Z",
+        "total_value": 300.0,
+        "number_guests": 1,
+        "created_at": "2022-11-25T15:03:45.904Z",
+        "update_at": "2022-11-26T04:17:45.232Z",
+        "advert": "1283e3e4-ba34-4e90-b673-b78a9239a0cc"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "3b78e349-ab23-9813-9802-1290c2b1034a",
+    "fields": {
+        "check_in_date": "2022-09-04",
+        "check_out_date": "2022-09-08T10:30:00Z",
+        "total_value": 480.0,
+        "number_guests": 1,
+        "created_at": "2022-08-03T15:03:45.904Z",
+        "update_at": "2022-10-12T04:17:45.232Z",
+        "advert": "1283e3e4-ba34-4e90-b673-b78a9239a0cc"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "8905a678-8725-7345-98a3-90bc12a3b456",
+    "fields": {
+        "check_in_date": "2022-07-15",
+        "check_out_date": "2022-07-16T08:45:00Z",
+        "total_value": 400.0,
+        "number_guests": 4,
+        "created_at": "2022-07-05T12:04:45.904Z",
+        "update_at": "2022-10-16T04:17:45.232Z",
+        "advert": "1283e3e4-ba34-4e90-b673-b78a9239a0cc"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "8765bc49-193c-98a3-9137-1254cb459ac3",
+    "fields": {
+        "check_in_date": "2022-10-09",
+        "check_out_date": "2022-10-15T10:30:00Z",
+        "total_value": 600.0,
+        "number_guests": 1,
+        "created_at": "2022-10-01T12:30:45.904Z",
+        "update_at": "2022-10-28T10:17:45.232Z",
+        "advert": "16343821-41ab-44c8-a693-b6a02889bf47"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "99ac2349-12c4-59a3-90a3-1239a349c209",
+    "fields": {
+        "check_in_date": "2022-05-10",
+        "check_out_date": "2022-05-12T09:20:30Z",
+        "total_value": 440.0,
+        "number_guests": 2,
+        "created_at": "2022-04-25T17:03:35.904Z",
+        "update_at": "2022-10-26T09:17:45.232Z",
+        "advert": "16343821-41ab-44c8-a693-b6a02889bf47"
+    }
+},
+{
+    "model": "properties.booking",
+    "pk": "3904b3a4-743a-8023-90ac-0b341c546802",
+    "fields": {
+        "check_in_date": "2022-11-10",
+        "check_out_date": "2022-11-12T10:30:00Z",
+        "total_value": 500.0,
+        "number_guests": 2,
+        "created_at": "2022-11-25T15:03:45.904Z",
+        "update_at": "2022-11-26T04:17:45.232Z",
+        "advert": "16343821-41ab-44c8-a693-b6a02889bf47"
+    }
+}
+]
