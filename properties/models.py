@@ -9,10 +9,11 @@ class Property(models.Model):
     guest_limit = models.IntegerField()
     bathrooms = models.IntegerField()
     pets_accepted = models.BooleanField()
+    comment_field = models.CharField(max_length=1000, default='')
     cleaning_cost = models.FloatField()
     activation_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField()
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.id_property)
@@ -20,7 +21,7 @@ class Property(models.Model):
 
 class Advert(models.Model):
     property = models.ForeignKey(
-      Property, on_delete=models.SET_NULL, null=True
+      Property, on_delete=models.CASCADE, null=True
     )
     id_advert = models.UUIDField(
       primary_key=True, default=uuid4, editable=False
@@ -28,7 +29,7 @@ class Advert(models.Model):
     advertising_platform = models.CharField(max_length=255)
     platform_rate = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField()
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.id_advert)
@@ -43,9 +44,10 @@ class Booking(models.Model):
     total_value = models.FloatField()
     number_guests = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField()
+    update_at = models.DateTimeField(auto_now=True)
     advert = models.ForeignKey(
-      Advert, on_delete=models.SET_NULL, null=True
+      Advert, on_delete=models.CASCADE,
+      null=True
     )
 
     def __str__(self):
