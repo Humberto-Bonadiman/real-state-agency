@@ -1,6 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework import status
+from datetime import datetime
 
 from properties.models import Property, Advert, Booking
 from real_state_agency.api.serializers import (
@@ -131,17 +133,36 @@ def booking_list(request):
 
     elif request.method == 'POST':
         booking_data = JSONParser().parse(request)
+        date_format = "%Y-%m-%d"
+        message = '"check_in_date" or "check_out_date" is in wrong format'
+        try:
+            checkin = booking_data['check_in_date']
+            checkin = datetime.strptime(checkin, date_format)
+            checkout = booking_data['check_out_date'][:10]
+            checkout = datetime.strptime(checkout, date_format)
+        except ValueError:
+            return JsonResponse(
+              {
+                'message': message,
+                'check_in_date': 'YYYY-MM-DD format',
+                'check_out_date': 'YYYY-MM-DDTHH:MM:SSZ format'
+              },
+              status=status.HTTP_400_BAD_REQUEST
+            )
+        result = checkin < checkout
+
         booking_serializer = BookingsSerializer(data=booking_data)
+        if result is False or booking_serializer.is_valid() is False:
+            return JsonResponse(
+              booking_serializer.errors,
+              status=400
+            )
         if booking_serializer.is_valid():
             booking_serializer.save()
             return JsonResponse(
               booking_serializer.data,
               status=201
             )
-        return JsonResponse(
-          booking_serializer.errors,
-          status=400
-        )
 
 
 @csrf_exempt
