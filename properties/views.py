@@ -1,5 +1,6 @@
+from sqlite3 import IntegrityError
 from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from datetime import datetime
@@ -12,7 +13,7 @@ from real_state_agency.api.serializers import (
 )
 
 
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def property_list(request):
     if request.method == 'GET':
         queryset = Property.objects.all()
@@ -21,25 +22,41 @@ def property_list(request):
         return JsonResponse(properties_serializer.data, safe=False)
 
     elif request.method == 'POST':
-        property_data = JSONParser().parse(request)
-        property_serializer = PropertiesSerializer(data=property_data)
-        if property_serializer.is_valid():
-            property_serializer.save()
+        try:
+            property_data = JSONParser().parse(request)
+            first = second = third = 0
+            first = property_data['guest_limit']
+            second = property_data['bathrooms']
+            third = property_data['cleaning_cost']
+
+            if first < 0 or second < 0:
+                raise IntegrityError
+            property_serializer = PropertiesSerializer(data=property_data)
+
+            if third < 0:
+                return JsonResponse({
+                    'message': '"cleaning_cost" cannot be less than 0'
+                  },
+                  status=status.HTTP_400_BAD_REQUEST)
+            if property_serializer.is_valid():
+                property_serializer.save()
+                return JsonResponse(
+                  property_serializer.data,
+                  status=201
+                )
             return JsonResponse(
-              property_serializer.data,
-              status=201
+              property_serializer.errors,
+              status=400
             )
-        return JsonResponse(
-          property_serializer.errors,
-          status=400
-        )
+        except IntegrityError:
+            return HttpResponse(status=400)
 
 
-@csrf_exempt
+@api_view(['GET', 'PATCH', 'DELETE'])
 def property_detail(request, pk):
     try:
         queryset = Property.objects.get(pk=pk)
-    except queryset.DoesNotExist:
+    except Property.DoesNotExist or ValueError:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
@@ -47,31 +64,45 @@ def property_detail(request, pk):
         return JsonResponse(property_serializer.data)
 
     elif request.method == 'PATCH':
-        property_data = JSONParser().parse(request)
-        property_serializer = PropertiesSerializer(
-          queryset,
-          data=property_data,
-          partial=True
-        )
-        if property_serializer.is_valid():
-            property_serializer.save()
-            return JsonResponse(
-              property_serializer,
-              status=201
+        try:
+            property_data = JSONParser().parse(request)
+            first = second = third = 0
+            first = property_data['guest_limit']
+            second = property_data['bathrooms']
+            third = property_data['cleaning_cost']
+
+            if first < 0 or second < 0:
+                raise IntegrityError
+            if third < 0:
+                return JsonResponse({
+                    'message': '"cleaning_cost" cannot be less than 0'
+                  },
+                  status=status.HTTP_400_BAD_REQUEST)
+            property_serializer = PropertiesSerializer(
+              queryset,
+              data=property_data,
+              partial=True
             )
-        return JsonResponse(
-          property_serializer.errors,
-          status=400
-        )
+            if property_serializer.is_valid():
+                property_serializer.save()
+                return JsonResponse(
+                  property_serializer.data,
+                  status=201
+                )
+            return JsonResponse(
+              property_serializer.errors,
+              status=400
+            )
+        except IntegrityError:
+            return HttpResponse(status=400)
 
     elif request.method == 'DELETE':
         queryset.delete()
         return HttpResponse(status=204)
 
 
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def advert_list(request):
-
     if request.method == 'GET':
         queryset = Advert.objects.all()
 
@@ -81,6 +112,12 @@ def advert_list(request):
     elif request.method == 'POST':
         advert_data = JSONParser().parse(request)
         advert_serializer = AdvertsSerializer(data=advert_data)
+        platform_rate = advert_data['platform_rate']
+        if platform_rate < 0:
+            return JsonResponse({
+                'message': '"platform_rate" cannot be less than 0'
+                }, status=status.HTTP_400_BAD_REQUEST
+            )
         if advert_serializer.is_valid():
             advert_serializer.save()
             return JsonResponse(
@@ -93,11 +130,11 @@ def advert_list(request):
         )
 
 
-@csrf_exempt
+@api_view(['GET', 'PATCH'])
 def advert_detail(request, pk):
     try:
         queryset = Advert.objects.get(pk=pk)
-    except queryset.DoesNotExist:
+    except Advert.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
@@ -111,6 +148,12 @@ def advert_detail(request, pk):
           data=data,
           partial=True
         )
+        platform_rate = data['platform_rate']
+        if platform_rate < 0:
+            return JsonResponse({
+                'message': '"platform_rate" cannot be less than 0'
+                }, status=status.HTTP_400_BAD_REQUEST
+            )
         if advert_serializer.is_valid():
             advert_serializer.save()
             return JsonResponse(
@@ -123,7 +166,7 @@ def advert_detail(request, pk):
         )
 
 
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def booking_list(request):
     if request.method == 'GET':
         queryset = Booking.objects.all()
@@ -140,6 +183,17 @@ def booking_list(request):
             checkin = datetime.strptime(checkin, date_format)
             checkout = booking_data['check_out_date'][:10]
             checkout = datetime.strptime(checkout, date_format)
+            result = checkin < checkout
+
+            booking_serializer = BookingsSerializer(data=booking_data)
+            if result is False:
+                return HttpResponse(status=400)
+            if booking_serializer.is_valid():
+                booking_serializer.save()
+                return JsonResponse(
+                  booking_serializer.data,
+                  status=201
+                )
         except ValueError:
             return JsonResponse(
               {
@@ -149,27 +203,13 @@ def booking_list(request):
               },
               status=status.HTTP_400_BAD_REQUEST
             )
-        result = checkin < checkout
-
-        booking_serializer = BookingsSerializer(data=booking_data)
-        if result is False or booking_serializer.is_valid() is False:
-            return JsonResponse(
-              booking_serializer.errors,
-              status=400
-            )
-        if booking_serializer.is_valid():
-            booking_serializer.save()
-            return JsonResponse(
-              booking_serializer.data,
-              status=201
-            )
 
 
-@csrf_exempt
+@api_view(['GET', 'DELETE'])
 def booking_detail(request, pk):
     try:
         queryset = Booking.objects.get(pk=pk)
-    except queryset.DoesNotExist:
+    except Booking.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':

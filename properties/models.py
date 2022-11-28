@@ -6,10 +6,10 @@ class Property(models.Model):
     id_property = models.UUIDField(
       primary_key=True, default=uuid4, editable=False
     )
-    guest_limit = models.IntegerField()
-    bathrooms = models.IntegerField()
+    guest_limit = models.PositiveIntegerField()
+    bathrooms = models.PositiveIntegerField()
     pets_accepted = models.BooleanField()
-    comment_field = models.CharField(max_length=1000, default='')
+    comment_field = models.CharField(max_length=1000, default='comment')
     cleaning_cost = models.FloatField()
     activation_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,10 @@ class Advert(models.Model):
     id_advert = models.UUIDField(
       primary_key=True, default=uuid4, editable=False
     )
-    advertising_platform = models.CharField(max_length=255)
+    advertising_platform = models.CharField(
+      max_length=255,
+      default='advertising'
+    )
     platform_rate = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
