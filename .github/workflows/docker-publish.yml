@@ -24,3 +24,14 @@ jobs:
         with:
           python-version: 3.9.7
           cache: pip
+
+      - name: Docker Compose Build
+        working-directory: .
+        run: docker-compose build
+
+      - name: Build and push Docker images
+        run: |
+          docker tag ${{ secrets.DOCKER_USERNAME }}/real-state-agency:1.0.0 ${{ secrets.DOCKER_USERNAME }}/real-state-agency:${{github.run_id}}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/real-state-agency:1.0.0 ${{ secrets.DOCKER_USERNAME }}/real-state-agency:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/real-state-agency:${{github.run_id}}
+          docker push ${{ secrets.DOCKER_USERNAME }}/real-state-agency:latest
