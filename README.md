@@ -133,3 +133,11 @@ O Python oferece um recurso chamado de ambiente virtual que permite sua máquina
   Com o seu ambiente virtual ativo, as dependências serão instaladas neste ambiente.
   Caso precise desativar o ambiente virtual, execute o comando "deactivate". 
   Lembre-se de ativar novamente quando voltar a trabalhar no projeto.
+  
+  ---
+  
+  ## Documentação
+  
+  ![Documentação Swagger](swagger.png)
+  
+  Para acessar a documentação você deve rodar a aplicação com o comando **python manage.py runserver** e depois entrar no **http://127.0.0.1:8000/docs/**.
