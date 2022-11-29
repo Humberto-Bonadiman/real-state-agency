@@ -6,7 +6,7 @@
 
 ## Descrição do projeto
 
-Neste projeto eu desenvolvi um sistema de banco de dados com 3 entidades: Imóveis(Properties), Anúcios(Adverts) e Reservas(Bookings). Um imóvel pode ter
+Neste projeto eu desenvolvi um sistema de banco de dados com 3 entidades: Imóveis (Properties), Anúncios (Adverts) e Reservas (Bookings). Um imóvel pode ter
 diversos anúncios, mas um anúncio é referente apenas a um imóvel. Um anúncio pode ter
 várias reservas, mas uma reserva se refere a apenas um anúncio.
 <br/>
