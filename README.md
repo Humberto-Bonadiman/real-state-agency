@@ -29,7 +29,7 @@ Após cada um dos passos, haverá um exemplo do comando a ser digitado para faze
 
 3. Instale as dependências:
 ```javascript
-  pip install -r requirements.txt
+  python3 -m pip install -r requirements.txt
 ```
 
 4. Aplique as migrations do projeto:
