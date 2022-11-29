@@ -2,16 +2,19 @@ version: '3.9'
 
 services:
   web:
+    image: humbertobonadiman/real-state-agency:1.0.0
     build: .
     environment:
       MYENV: EXAMPLE
     volumes:
       - .:/code
   web_migrate:
+    image: humbertobonadiman/real-state-agency:1.0.0
     extends:
       service: web
     command: python manage.py migrate
   web_run:
+    image: humbertobonadiman/real-state-agency:1.0.0
     extends:
       service: web
     command: python manage.py runserver 0.0.0.0:8000
