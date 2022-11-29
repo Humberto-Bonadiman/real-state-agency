@@ -2,6 +2,8 @@
 
 ---
 
+[![Continuos Integration with GitHub](https://github.com/Humberto-Bonadiman/real-state-agency/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Humberto-Bonadiman/real-state-agency/actions/workflows/docker-publish.yml)
+
 ## Descrição do projeto
 
 Neste projeto eu desenvolvi um sistema de banco de dados com 3 entidades: Imóveis(Properties), Anúcios(Adverts) e Reservas(Bookings). Um imóvel pode ter
