@@ -45,6 +45,13 @@ Após cada um dos passos, haverá um exemplo do comando a ser digitado para faze
 
 ---
 
+## Utilizar o seed
+
+Para já criar alguns dados no banco de dados utilize o comando abaixo:
+```javascript
+python manage.py loaddata properties/seed/0001_properties.json
+```
+
 ## Comandos para utilizar o Docker
 
 Para criar e iniciar os contêineres:
